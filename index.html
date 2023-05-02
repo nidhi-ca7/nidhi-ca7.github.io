@@ -1,94 +1,149 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Page 1</title>
-    <style>
-      body{
-        background-color: coral;
-      }
-    </style>
-    <script>
-     console.log("Hi, My name is Nidhi.");
-      var x = 5;
-      document.write(x);
+<head>
+<title>Page 1</title>
+<style>
+body{
+background-color: coral;
+}
+</style>
+<script>
+console.log("Hi, My name is Nidhi.");
+var x = 5;
+document.write(x);
 
-      function bgcolor () {
-        document.body.style.backgroundColor="pink"
-      }
-    </script>
+function bgcolor () {
+document.body.style.backgroundColor="pink"
+}
+</script>
 
-    <script>
-        function Book(title, author, genre, year){
-            this.title = title;
-            this.author = author;
-            this.genre = this.genre;
-            this.year = year;
-            this.reserved = false;
-            this.reserve = function(){
-                this.reserved = true;
-                return true;
-            }
-            this.isAvailable = function(){
-                return !this.reserved
-            }
-        }
+<script>
+function Book(title, author, genre, year){
+    this.title = title;
+    this.author = author;
+    this.genre = this.genre;
+    this.year = year;
+    this.reserved = false;
+    this.reserve = function(){
+        this.reserved = true;
+        return true;
+    }
+    this.isAvailable = function(){
+        return !this.reserved
+    }
+}
 
-        let b = new Book();
+let b = new Book();
 
-        function init(){
-            b.author = document.getElementById("author").value
-            b.genre = document.getElementById("genre").value;
-            b.year = document.getElementById("year").value
-            b.title = document.getElementById("title").value;
-        }
+function init(){
+    b.author = document.getElementById("author").value
+    b.genre = document.getElementById("genre").value;
+    b.year = document.getElementById("year").value
+    b.title = document.getElementById("title").value;
+}
 
-        function reserveBook(){  
-            init();          
-            b.reserve();
-            document.getElementById("output").innerText = b.title + " has been successfully reserved";
-        }
+function reserveBook(){
+    init();
+    b.reserve();
+    document.getElementById("output").innerText = b.title + " has been successfully reserved";
+    inittable();
+}
 
-        function isBookAvailable(){
-            init(); 
-            document.getElementById("output").innerText = b.title + "'s availability "+ b.isAvailable();
-        }
+function isBookAvailable(){
+    init();
+    document.getElementById("output").innerText = b.title + "'s availability "+ b.isAvailable();
+    inittable();
+}
 
-    </script>
-  </head>
-  <body>
-     <h1>Hello World!</h1>
+function update(id,content){
+    let elm = document.getElementById(id);
+    if(elm){
+        elm.innerText=content;
+    }
+}
 
-    <div onclick="bgcolor()"><u> Click here to change color!</u></div>
+function inittable(){
+    init();
+    update("titletd",b.title);
+    update("authortd",b.author);
+    update("genretd",b.genre);
+    update("yearpublishedtd",b.year);
+    update("isitavailabletd",b.isAvailable());
+    update("isitreservedtd",b.reserved);
+}
+</script>
+</head>
+<body onload="inittable();">
+<h1>Hello World!</h1>
 
-    <br>
+<div onclick="bgcolor()"><u> Click here to change color!</u></div>
 
-    <form id="books" name="books">
-       
-        <label for="title">Book Title:</label>
-        <br>
-        <input type="textbox" id="title" name="title" value="The Poppy War">
-        <br>
-        <label for="author">Author:</label>
-        <br>
-        <input type="textbox" id="author" name="author" value="R.F. Kuang"> 
-        <br>
-        <label for="genre">Genre:</label>
-        <br>
-        <input type="textbox" id="genre" name="genre" value="Historical Fiction">
-        <br>
-        <label for="year">Year Published:</label>
-        <br>
-        <input type="textbox" id="year" name="year" value="2018"> 
-        <br>
-        <br>
-        <button type="button"  onclick="reserveBook()">Reserve</button>
-        <br>
-        <br>
-        <button type="button"  onclick="isBookAvailable()">Is it Available?</button>
-        <br>
-        <br>
-        <div id="output" name="output"></div>
-    </form>
+<br>
 
-    </body>
-  </html>
+<form id="books" name="books">
+<label for="title">Book Title:</label>
+<br>
+<input type="textbox" id="title" name="title" value="The Poppy War">
+<br>
+<label for="author">Author:</label>
+<br>
+<input type="textbox" id="author" name="author" value="R.F. Kuang">
+<br>
+<label for="genre">Genre:</label>
+<br>
+<input type="textbox" id="genre" name="genre" value="Historical Fiction">
+<br>
+<label for="year">Year Published:</label>
+<br>
+<input type="textbox" id="year" name="year" value="2018">
+<br>
+<br>
+<button type="button" onclick="reserveBook()">Reserve</button>
+<br>
+<br>
+<button type="button" onclick="isBookAvailable()">Is it Available?</button>
+<br>
+<br>
+<div id="output" name="output"></div>
+</form>
+
+<table border="1">
+    <tr>
+        <td>
+            Book title
+        </td>
+        <td>
+            Author
+        </td>    
+        <td>
+            Genre
+        </td>    
+        <td>
+            Year published
+        </td>    
+        <td>
+            Is it Available?
+        </td>    
+        <td>
+            Is it Reserved?
+        </td>    
+    </tr>
+    <tr>
+        <td id="titletd">
+            
+        </td>
+        <td id="authortd">
+        </td>    
+        <td id="genretd">
+        </td>    
+        <td id="yearpublishedtd">
+        </td>    
+        <td id="isitavailabletd" style="font-weight: bold;">
+        </td>    
+        <td id="isitreservedtd" style="font-weight: bold;">
+        </td>    
+    </tr>
+
+</table>
+</body>
+</html>
