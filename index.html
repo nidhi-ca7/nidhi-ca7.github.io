@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Page 1</title>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <style>
 body{
 background-color: coral;
@@ -18,6 +19,8 @@ document.body.style.backgroundColor="pink"
 </script>
 
 <script>
+
+let mybooks = {};
 function Book(title, author, genre, year){
     this.title = title;
     this.author = author;
@@ -33,20 +36,24 @@ function Book(title, author, genre, year){
     }
 }
 
-let b = new Book();
 
 function init(){
+    let b = new Book();
     b.author = document.getElementById("author").value
     b.genre = document.getElementById("genre").value;
     b.year = document.getElementById("year").value
     b.title = document.getElementById("title").value;
+    return b;
 }
 
 function reserveBook(){
-    init();
-    b.reserve();
-    document.getElementById("output").innerText = b.title + " has been successfully reserved";
-    inittable();
+    var book = init();
+    var e = mybooks[book.title];
+    if(!e){
+        book.reserve();
+        inittable(book);
+        mybooks[book.title] = book;
+    }
 }
 
 function isBookAvailable(){
@@ -62,19 +69,15 @@ function update(id,content){
     }
 }
 
-function inittable(){
+function inittable(book){
     init();
-    update("titletd",b.title);
-    update("authortd",b.author);
-    update("genretd",b.genre);
-    update("yearpublishedtd",b.year);
-    update("isitavailabletd",b.isAvailable());
-    update("isitreservedtd",b.reserved);
+    $("table").find('tbody')
+    .append("<tr><td>"+book.title+"</td><td>"+book.author+"</td><td>"+book.genre+"</td><td>"+book.year+"</td><td>"+book.isAvailable()+"</td><td>"+book.reserved+"</td></tr>")
 }
 </script>
 </head>
-<body onload="inittable();">
-<h1>Hello World!</h1>
+<body>
+<h1>Library reservation system</h1>
 
 <div onclick="bgcolor()"><u> Click here to change color!</u></div>
 
@@ -99,8 +102,6 @@ function inittable(){
 <br>
 <br>
 <img src="reserve.jpg" title="Click here to reserve" onclick="reserveBook()">
-<img height="160px" src="updatestatus.jpg" title="Click here to update the status" onclick="isBookAvailable()">
-<br>
 <br>
 <div id="output" name="output"></div>
 </form>
@@ -124,21 +125,6 @@ function inittable(){
         </td>    
         <td>
             Is it Reserved?
-        </td>    
-    </tr>
-    <tr>
-        <td id="titletd">
-            
-        </td>
-        <td id="authortd">
-        </td>    
-        <td id="genretd">
-        </td>    
-        <td id="yearpublishedtd">
-        </td>    
-        <td id="isitavailabletd" style="font-weight: bold;">
-        </td>    
-        <td id="isitreservedtd" style="font-weight: bold;">
         </td>    
     </tr>
 </table>
