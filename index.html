@@ -72,7 +72,7 @@ function update(id,content){
 function inittable(book){
     init();
     $("table").find('tbody')
-    .append("<tr><td>"+book.title+"</td><td>"+book.author+"</td><td>"+book.genre+"</td><td>"+book.year+"</td><td>"+book.isAvailable()+"</td><td>"+book.reserved+"</td></tr>")
+    .append("<tr><td>"+book.title+"</td><td>"+book.author+"</td><td>"+book.genre+"</td><td>"+book.year+"</td><td>"+book.reserved+"</td></tr>")
 }
 </script>
 </head>
@@ -119,9 +119,6 @@ function inittable(book){
         </td>    
         <td>
             Year published
-        </td>    
-        <td>
-            Is it Available?
         </td>    
         <td>
             Is it Reserved?
