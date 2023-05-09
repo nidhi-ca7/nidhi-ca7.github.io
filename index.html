@@ -56,19 +56,6 @@ function reserveBook(){
     }
 }
 
-function isBookAvailable(){
-    init();
-    document.getElementById("output").innerText = b.title + "'s availability "+ b.isAvailable();
-    inittable();
-}
-
-function update(id,content){
-    let elm = document.getElementById(id);
-    if(elm){
-        elm.innerText=content;
-    }
-}
-
 function inittable(book){
     init();
     $("table").find('tbody')
