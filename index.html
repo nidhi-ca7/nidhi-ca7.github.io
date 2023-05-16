@@ -1,68 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Page 1</title>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-<style>
-body{
-background-color: coral;
-}
-</style>
-<script>
-console.log("Hi, My name is Nidhi.");
-var x = 5;
-document.write(x);
+    <head>
+        <title>Page 1</title>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <style>
+        body{
+            background-color: coral;
+        }
+        </style>
+        <script>
+            console.log("Hi, My name is Nidhi.");
+            var x = 5;
+            document.write(x);
 
-function bgcolor () {
-document.body.style.backgroundColor="pink"
-}
-</script>
+            function bgcolor () {
+            document.body.style.backgroundColor="pink"
+            }
+        </script>
 
-<script>
+        <script>
+            let mybooks = {};
+            function Book(title, author, genre, year){
+                this.title = title;
+                this.author = author;
+                this.genre = this.genre;
+                this.year = year;
+                this.reserved = false;
+                this.reserve = function(){
+                    this.reserved = true;
+                    return true;
+                }
+                this.isAvailable = function(){
+                    return !this.reserved
+                }
+            }
 
-let mybooks = {};
-function Book(title, author, genre, year){
-    this.title = title;
-    this.author = author;
-    this.genre = this.genre;
-    this.year = year;
-    this.reserved = false;
-    this.reserve = function(){
-        this.reserved = true;
-        return true;
-    }
-    this.isAvailable = function(){
-        return !this.reserved
-    }
-}
+            function init(){
+                let b = new Book();
+                b.author = document.getElementById("author").value
+                b.genre = document.getElementById("genre").value;
+                b.year = document.getElementById("year").value
+                b.title = document.getElementById("title").value;
+                return b;
+            }
 
+            function reserveBook(){
+                var book = init();
+                var e = mybooks[book.title];
+                if(!e){
+                    book.reserve();
+                inittable(book);
+                mybooks[book.title] = book;
+                }
+                var nobooks = count();
+                $("#bookscount").text(nobooks);
+                draw(nobooks);
+            }
 
-function init(){
-    let b = new Book();
-    b.author = document.getElementById("author").value
-    b.genre = document.getElementById("genre").value;
-    b.year = document.getElementById("year").value
-    b.title = document.getElementById("title").value;
-    return b;
-}
+            function count(){
+                let i=0;
+                for(let item in mybooks){
+                    i++;
+                }
+                return i;
+            }
+            function inittable(book){
+                init();
+                $("table").find('tbody')
+                .append("<tr><td>"+book.title+"</td><td>"+book.author+"</td><td>"+book.genre+"</td><td>"+book.year+"</td><td>"+book.reserved+"</td></tr>")
+            }
 
-function reserveBook(){
-    var book = init();
-    var e = mybooks[book.title];
-    if(!e){
-        book.reserve();
-        inittable(book);
-        mybooks[book.title] = book;
-    }
-}
-
-function inittable(book){
-    init();
-    $("table").find('tbody')
-    .append("<tr><td>"+book.title+"</td><td>"+book.author+"</td><td>"+book.genre+"</td><td>"+book.year+"</td><td>"+book.reserved+"</td></tr>")
-}
-</script>
-</head>
+            function draw(size){
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                ctx.fillStyle = "blue"; 
+                ctx.fillRect(0, 10, 15*size, 20);
+            }
+        </script>
+    </head>
 <body>
 <h1>Library reservation system</h1>
 
@@ -71,46 +86,50 @@ function inittable(book){
 <br>
 
 <form id="books" name="books">
-<label for="title">Book Title:</label>
-<br>
-<input type="textbox" id="title" name="title" value="The Poppy War">
-<br>
-<label for="author">Author:</label>
-<br>
-<input type="textbox" id="author" name="author" value="R.F. Kuang">
-<br>
-<label for="genre">Genre:</label>
-<br>
-<input type="textbox" id="genre" name="genre" value="Historical Fiction">
-<br>
-<label for="year">Year Published:</label>
-<br>
-<input type="textbox" id="year" name="year" value="2018">
-<br>
-<br>
-<img src="reserve.jpg" title="Click here to reserve" onclick="reserveBook()">
-<br>
-<div id="output" name="output"></div>
+    <label for="title">Book Title:</label>
+    <br>
+    <input type="textbox" id="title" name="title" value="The Poppy War">
+    <br>
+    <label for="author">Author:</label>
+    <br>
+    <input type="textbox" id="author" name="author" value="R.F. Kuang">
+    <br>
+    <label for="genre">Genre:</label>
+    <br>
+    <input type="textbox" id="genre" name="genre" value="Historical Fiction">
+    <br>
+    <label for="year">Year Published:</label>
+    <br>
+    <input type="textbox" id="year" name="year" value="2018">
+    <br>
+    <br>
+    <img src="reserve.jpg" title="Click here to reserve" onclick="reserveBook()" width="150px;">
+    <br>
+    <div id="output" name="output"></div>
 </form>
 
 <table border="1">
     <tr>
         <td>
-            Book title
+        Book title
         </td>
         <td>
-            Author
-        </td>    
+        Author
+        </td> 
         <td>
-            Genre
-        </td>    
+        Genre
+        </td> 
         <td>
-            Year published
-        </td>    
+        Year published
+        </td> 
         <td>
-            Is it Reserved?
-        </td>    
+        Is it Reserved?
+        </td> 
     </tr>
 </table>
+<p><b>Number of books reserved : </b><span id="bookscount">0</span></p>
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+</canvas>
+
 </body>
 </html>
