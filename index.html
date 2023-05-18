@@ -19,6 +19,7 @@
         </script>
 
         <script>
+            var size = 0;
             let mybooks = {};
             function Book(title, author, genre, year){
                 this.title = title;
@@ -52,9 +53,11 @@
                 inittable(book);
                 mybooks[book.title] = book;
                 }
-                var nobooks = count();
-                $("#bookscount").text(nobooks);
-                draw(nobooks);
+                size = count();
+                $("#bookscount").text(size);
+                clear(loops);
+                loops=0;
+                draw();
             }
 
             function count(){
@@ -69,12 +72,23 @@
                 $("table").find('tbody')
                 .append("<tr><td>"+book.title+"</td><td>"+book.author+"</td><td>"+book.genre+"</td><td>"+book.year+"</td><td>"+book.reserved+"</td></tr>")
             }
-
-            function draw(size){
+            var loops = 0;
+            function draw(){
                 var c = document.getElementById("myCanvas");
                 var ctx = c.getContext("2d");
-                ctx.fillStyle = "blue"; 
-                ctx.fillRect(0, 10, 15*size, 20);
+                ctx.fillStyle = "blue";
+                ctx.fillRect(0, 0, loops, 100);
+                loops++
+                if(loops<=60*size){
+                    window.requestAnimationFrame (draw);
+                }
+            }
+
+            function clear(loops){
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                ctx.fillStyle = "blue";
+                ctx.clearRect(0, 0, loops, 100);
             }
         </script>
     </head>
@@ -128,7 +142,7 @@
     </tr>
 </table>
 <p><b>Number of books reserved : </b><span id="bookscount">0</span></p>
-<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+<canvas id="myCanvas" width="1000" height="100" style="border:1px solid #000000;">
 </canvas>
 
 </body>
