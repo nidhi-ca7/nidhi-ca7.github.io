@@ -76,7 +76,6 @@ function render(){
     drawText(comp.score,3*canvas.width/4, canvas.height/5, "red");
     drawRect(user.x,user.y,user.width,user.height,user.color);
     drawRect(comp.x,comp.y,comp.width,comp.height,comp.color);
-    ball.color = randomRgbColor();
     drawCircle(ball.x,ball.y,ball.radius,ball.color);
     drawNet();
     filldots();
@@ -161,6 +160,8 @@ function resetBall(){
     ball.y = canvas.height/2;
     ball.speed = 5;
     ball.velocityX = -ball.velocityX;
+    ball.color = randomRgbColor();
+
 }
 
 canvas.addEventListener("mousemove", movePaddle);
