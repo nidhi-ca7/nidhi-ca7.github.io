@@ -62,23 +62,32 @@ function drawText(text, x, y, color){
 
 function drawNet(){
     for(let i=0; i<=canvas.height;i+=15){
+        net.color=randomRgbColor();
         drawRect(net.x, net.y+i, net.width, net.height,net.color)
     }
 }
 
 function render(){
-    var grd = context.createLinearGradient(0, 0, 500, 0);
-    grd.addColorStop(0, "red");
-    grd.addColorStop(1, "blue");
+    var grd = context.createLinearGradient(0, 0, 400, 0);
+    grd.addColorStop(0, 'rgb(105,105,105)');
+    grd.addColorStop(1, 'rgb(211,211,211)');
     drawRect(0,0,canvas.width,canvas.height, grd)
     drawText(user.score,canvas.width/4, canvas.height/5, "blue");
     drawText(comp.score,3*canvas.width/4, canvas.height/5, "red");
     drawRect(user.x,user.y,user.width,user.height,user.color);
     drawRect(comp.x,comp.y,comp.width,comp.height,comp.color);
+    ball.color = randomRgbColor();
     drawCircle(ball.x,ball.y,ball.radius,ball.color);
     drawNet();
     filldots();
 }
+
+function randomRgbColor(){
+    let r = Math.floor(Math.random() * 256); // Random between 0-255
+    let g = Math.floor(Math.random() * 256); // Random between 0-255
+    let b = Math.floor(Math.random() * 256); // Random between 0-255
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  };
 
 function filldots(){
     for (let i = 0; i < 26; i++) {
@@ -87,7 +96,7 @@ function filldots(){
             255 - 42.5 * j
           )})`;
           context.beginPath();
-          context.arc(12.5 + j * 25, 12.5 + i * 25, 4, 0, 2 * Math.PI, true);
+          context.arc(12.5 + j * 25, 12.5 + i * 25, 1, 0, 2 * Math.PI, true);
           context.stroke();
     }
     }
@@ -121,7 +130,7 @@ function update(){
         let direction = (ball.x + ball.radius< canvas.width/2)?1:-1;
         ball.velocityX = direction * ball.speed * Math.cos(angleRad);
         ball.velocityY = ball.speed * Math.sin(angleRad);
-        ball.speed += 0.1;
+        ball.speed += 0.05;
     }
 
     if(ball.x - ball.radius < 0){
