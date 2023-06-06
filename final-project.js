@@ -93,9 +93,9 @@ function update(){
             return;
         }
     }
-    if(comp.x>canvas.width){
-        comp.x = 10;
-        comp.y = canvas.height/2
+    if(comp.x>=canvas.width-comp.width){
+        stop();
+        return;
     }
     comp.x++;
     user.score = parseInt(comp.x/10);
