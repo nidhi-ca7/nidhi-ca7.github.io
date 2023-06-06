@@ -31,7 +31,7 @@ const obstacle2 = {
     x: 200,
     y: 0,
     width:20,
-    height:200,
+    height:180,
     color: "green"
 }
 
