@@ -94,7 +94,8 @@ function update(){
         }
     }
     if(comp.x>canvas.width){
-        comp.x=10;
+        comp.x = 10;
+        comp.y = canvas.height/2
     }
     comp.x++;
     user.score = parseInt(comp.x/10);
@@ -140,11 +141,11 @@ function isCrashedWith(obstacle){
 }
 
 function moveup() {  
-    comp.y -= 5;       
+    comp.y -= 10;       
 }  
   
 function movedown() {  
-    comp.y += 5;  
+    comp.y += 10;  
 }
 
 document.addEventListener("keydown", function(event) {
