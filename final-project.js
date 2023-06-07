@@ -21,7 +21,7 @@ const comp = {
 
 const obstacle1 = {
     x: 300,
-    y: canvas.height-250,
+    y: canvas.height-230,
     width:20,
     height:200,
     color: "red"
